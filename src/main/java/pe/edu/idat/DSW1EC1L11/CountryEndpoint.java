@@ -6,8 +6,8 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import io.spring.guides.gs_producing_web_service.GetCountryRequest;
-import io.spring.guides.gs_producing_web_service.GetCountryResponse;
+import io.spring.guides.gs_producing_web_service.GetdiasRequest;
+import io.spring.guides.gs_producing_web_service.GetdiasResponse;
 
 @Endpoint
 public class CountryEndpoint {
@@ -22,8 +22,8 @@ public class CountryEndpoint {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
 	@ResponsePayload
-	public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request) {
-		GetCountryResponse response = new GetCountryResponse();
+	public GetdiasResponse getCountry(@RequestPayload GetdiasRequest request) {
+		GetdiasResponse response = new GetdiasResponse();
 		response.setCountry(countryRepository.findCountry(request.getName()));
 
 		return response;
