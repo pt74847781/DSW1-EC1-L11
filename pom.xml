@@ -60,7 +60,7 @@
 	</executions>
 	<configuration>
 		<sources>
-			<source>${project.basedir}/src/main/resources/dias.xsd</source>
+			<source>${project.basedir}/src/main/resources/countries.xsd</source>
 		</sources>
 	</configuration>
 </plugin>
