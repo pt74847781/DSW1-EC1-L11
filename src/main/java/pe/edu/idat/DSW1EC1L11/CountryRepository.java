@@ -15,7 +15,7 @@ public class CountryRepository {
 
 	@PostConstruct
 	public void initData() {
-		Country spain = new Country();
+		dias spain = new dias();
 		spain.setName("Spain");
 		spain.setCapital("Madrid");
 		spain.setCurrency(Currency.EUR);
@@ -25,9 +25,7 @@ public class CountryRepository {
 
 		Country pe = new Country();
 	    pe.setName("peru");
-		pe.setCapital("lima");
-		pe.setCurrency(Currency.PEN);
-		pe.setPopulation(424567855);
+		
 
 		countries.put(pe.getName(), pe);
 
