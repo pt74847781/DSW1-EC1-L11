@@ -1,55 +1,32 @@
 package pe.edu.idat.DSW1EC1L11;
 
-import jakarta.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import io.spring.guides.gs_producing_web_service.Country;
-import io.spring.guides.gs_producing_web_service.Currency;
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
+import io.spring.guides.gs_producing_web_service.GetCountryRequest;
+import io.spring.guides.gs_producing_web_service.GetCountryResponse;
 
-@Component
-public class CountryRepository {
-	private static final Map<String, Country> countries = new HashMap<>();
+@Endpoint
+public class CountryEndpoint {
+	private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
 
-	@PostConstruct
-	public void initData() {
-		Country spain = new Country();
-		spain.setName("Spain");
-		spain.setCapital("Madrid");
-		spain.setCurrency(Currency.EUR);
-		spain.setPopulation(46704314);
+	private CountryRepository countryRepository;
 
-		countries.put(spain.getName(), spain);
-
-		Country pe = new Country();
-	    pe.setName("peru");
-		pe.setCapital("lima");
-		pe.setCurrency(Currency.PEN);
-		pe.setPopulation(424567855);
-
-		countries.put(pe.getName(), pe);
-
-		Country poland = new Country();
-		poland.setName("Poland");
-		poland.setCapital("Warsaw");
-		poland.setCurrency(Currency.PLN);
-		poland.setPopulation(38186860);
-
-		countries.put(poland.getName(), poland);
-
-		Country uk = new Country();
-		uk.setName("United Kingdom");
-		uk.setCapital("London");
-		uk.setCurrency(Currency.GBP);
-		uk.setPopulation(63705000);
-
-		countries.put(uk.getName(), uk);
+	@Autowired
+	public CountryEndpoint(CountryRepository countryRepository) {
+		this.countryRepository = countryRepository;
 	}
 
-	public Country findCountry(String name) {
-		Assert.notNull(name, "The country's name must not be null");
-		return countries.get(name);
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
+	@ResponsePayload
+	public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request) {
+		GetCountryResponse response = new GetCountryResponse();
+		response.setCountry(countryRepository.findCountry(request.getName()));
+
+		return response;
 	}
 }
+

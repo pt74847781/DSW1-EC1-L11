@@ -12,45 +12,36 @@ import org.w3c.dom.css.Counter;
 
 @Component
 public class CountryRepository {
-	private static final Map<String, Country> countries = new HashMap<>();
+	private static final Map<String, Country> dias = new HashMap<>();
 
 	@PostConstruct
 	public void initData() {
 		Country spain = new Country();
 		spain.setName("Spain");
-		spain.setCapital("Madrid");
-		spain.setCurrency(Currency.EUR);
-		spain.setPopulation(46704314);
-
-		countries.put(spain.getName(), spain);
+		
+		dias.put(spain.getName(), spain);
 
 		Country pe = new Country();
 	    pe.setName("peru");
-		pe.setCapital("lima");
-		pe.setCurrency(Currency.PEN);
-		pe.setPopulation(424567855);
+		
 
-		countries.put(pe.getName(), pe);
+		dias.put(pe.getName(), pe);
 
 		Country poland = new Country();
 		poland.setName("Poland");
-		poland.setCapital("Warsaw");
-		poland.setCurrency(Currency.PLN);
-		poland.setPopulation(38186860);
+		
 
 		countries.put(poland.getName(), poland);
 
 		Country uk = new Country();
 		uk.setName("United Kingdom");
-		uk.setCapital("London");
-		uk.setCurrency(Currency.GBP);
-		uk.setPopulation(63705000);
+		
 
-		countries.put(uk.getName(), uk);
+		dias.put(uk.getName(), uk);
 	}
 
 	public Country findCountry(String name) {
 		Assert.notNull(name, "The country's name must not be null");
-		return countries.get(name);
+		return dias.get(name);
 	}
 }
